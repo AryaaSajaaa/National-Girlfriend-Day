@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Hari Pacar Nasional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #FFF6F0;
+    --blush: #FFC9D6;
+    --rose: #D6446B;
+    --plum: #5B2438;
+    --gold: #E3B34E;
+    --ink: #3A2028;
+    --shadow: rgba(91,36,56,0.18);
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: linear-gradient(180deg, var(--paper) 0%, #FFEDE4 55%, #FFE1E9 100%);
+    color: var(--ink);
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Floating hearts, ambient, restrained */
+  .heart-field{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .heart-field span{
+    position: absolute;
+    bottom: -10%;
+    font-size: 1.4rem;
+    color: var(--rose);
+    opacity: 0.25;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp{
+    0%{ transform: translateY(0) rotate(0deg); opacity: 0; }
+    10%{ opacity: 0.3; }
+    90%{ opacity: 0.2; }
+    100%{ transform: translateY(-110vh) rotate(25deg); opacity: 0; }
+  }
+
+  .wrap{ position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 5rem 1.5rem 4rem; }
+
+  header{ text-align:center; margin-bottom: 4rem; }
+
+  .eyebrow{
+    display:inline-block;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: var(--rose);
+    background: #fff;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    box-shadow: 0 4px 14px var(--shadow);
+    margin-bottom: 1.4rem;
+  }
+
+  h1{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.08;
+    color: var(--plum);
+  }
+  h1 em{
+    font-style: italic;
+    font-weight: 500;
+    color: var(--rose);
+  }
+
+  .sub{
+    margin-top: 1.1rem;
+    font-size: 1.05rem;
+    color: #7A4A5A;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Signature element: the envelope */
+  .envelope-stage{
+    display:flex;
+    justify-content:center;
+    margin: 3rem 0 4.5rem;
+  }
+
+  .envelope{
+    position: relative;
+    width: 400px;
+    max-width: 90vw;
+    height: 220px;
+    cursor: pointer;
+    filter: drop-shadow(0 18px 30px var(--shadow));
+  }
+
+  .envelope .body{
+    position:absolute; inset:0;
+    background: #fff;
+    border-radius: 10px;
+    overflow:hidden;
+    border: 1px solid #f3d9e0;
+  }
+
+  .envelope .flap{
+    position:absolute;
+    top:0; left:0; width:100%; height:100%;
+    background: linear-gradient(135deg, var(--blush), var(--rose));
+    clip-path: polygon(0 0, 50% 55%, 100% 0);
+    transform-origin: top;
+    transition: transform 0.6s cubic-bezier(.4,.2,.2,1);
+    z-index: 3;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .envelope .pocket{
+    position:absolute; bottom:0; left:0; width:100%; height:70%;
+    background: linear-gradient(180deg, #fff, #FFF1F5);
+    clip-path: polygon(0 100%, 0 20%, 50% 55%, 100% 20%, 100% 100%);
+    z-index: 2;
+  }
+
+  .envelope .letter{
+    position:absolute;
+    left: 6%;
+    bottom: 6%;
+    width: 88%;
+    height: 80%;
+    background: #FFFDF9;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    z-index: 1;
+    transform: translateY(0%);
+    transition: transform 0.7s cubic-bezier(.3,.2,.2,1) 0.15s;
+    display:flex;
+    align-items:stretch;
+    justify-content:center;
+    gap: 1rem;
+    text-align:left;
+    padding: 1rem 1.2rem;
+  }
+
+  .envelope .letter-text{
+    flex: 1.3;
+    max-height: 100%;
+    overflow-y: auto;
+    padding-right: 0.4rem;
+  }
+
+  .envelope .letter-text::-webkit-scrollbar{
+    width: 5px;
+  }
+  .envelope .letter-text::-webkit-scrollbar-track{
+    background: transparent;
+  }
+  .envelope .letter-text::-webkit-scrollbar-thumb{
+    background: var(--blush);
+    border-radius: 999px;
+  }
+  .envelope .letter-text{
+    scrollbar-width: thin;
+    scrollbar-color: var(--blush) transparent;
+  }
+
+  .envelope .letter p{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--plum);
+    line-height: 1.5;
+  }
+
+  .envelope .letter-photo{
+    flex: 1;
+    max-width: 110px;
+    aspect-ratio: 3/4;
+    border-radius: 8px;
+    background: linear-gradient(160deg, var(--blush), #FFF1F5);
+    border: 4px solid #fff;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    transform: rotate(3deg);
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    gap: 0.3rem;
+    flex-shrink: 0;
+    align-self: center;
+    overflow: hidden;
+  }
+
+  .envelope .letter-photo img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+  }
+
+  .envelope .letter-photo .placeholder-icon{
+    font-size: 1.6rem;
+    color: var(--rose);
+    opacity: 0.6;
+  }
+
+  .envelope .letter-photo .placeholder-label{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.55rem;
+    color: #B4788E;
+    text-align:center;
+    letter-spacing: 0.03em;
+    padding: 0 0.3rem;
+  }
+
+  .envelope .seal{
+    position:absolute;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px; height: 44px;
+    background: var(--gold);
+    border-radius: 50%;
+    z-index: 4;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .envelope.open .flap{ transform: rotateX(180deg); }
+  .envelope.open .seal{ opacity: 0; transform: translate(-50%,-50%) scale(0.5); }
+  .envelope.open .letter{ transform: translateY(-38%); }
+
+  .hint{
+    text-align:center;
+    font-size: 0.85rem;
+    color: #A9788A;
+    margin-top: 1rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* Reasons section */
+  .reasons-title{
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--plum);
+    text-align:center;
+    margin-bottom: 2rem;
+  }
+
+  .reasons{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .reason-card{
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.5rem 1.3rem;
+    box-shadow: 0 8px 20px var(--shadow);
+    border: 1px solid #FBE4EA;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .reason-card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 14px 26px var(--shadow);
+  }
+
+  .reason-card .icon{
+    font-size: 1.5rem;
+    margin-bottom: 0.6rem;
+    display:block;
+  }
+
+  .reason-card h3{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--rose);
+    margin-bottom: 0.4rem;
+  }
+
+  .reason-card p{
+    font-size: 0.9rem;
+    color: #7A4A5A;
+    line-height: 1.5;
+  }
+
+  footer{
+    text-align:center;
+    padding-top: 2rem;
+    border-top: 1px dashed #F0C4D0;
+  }
+
+  footer p{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--plum);
+    font-size: 1rem;
+  }
+
+  footer span{
+    display:block;
+    margin-top: 0.4rem;
+    font-family: 'Quicksand', sans-serif;
+    font-style: normal;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #C58AA0;
+  }
+
+  /* Full-screen flower burst on page load */
+  .petal-burst{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 1.1s ease;
+  }
+  .petal-burst.fade{ opacity: 0; }
+
+  .petal-burst span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 1.6rem;
+    will-change: transform, opacity;
+    animation-name: petalBurstFall;
+    animation-timing-function: cubic-bezier(.2,.7,.3,1);
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes petalBurstFall{
+    0%{
+      transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
+      opacity: 0;
+    }
+    12%{
+      opacity: 1;
+    }
+    38%{
+      transform: translate(calc(-50% + var(--midX)), calc(-50% + var(--midY))) scale(1) rotate(140deg);
+      opacity: 1;
+    }
+    100%{
+      transform: translate(calc(-50% + var(--midX)), calc(-50% + var(--midY) + var(--fallY))) scale(0.85) rotate(320deg);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .heart-field span{ animation: none; display:none; }
+    .envelope .flap, .envelope .letter, .envelope .seal{ transition: none; }
+    .petal-burst{ display: none; }
+  }
+
+  button:focus-visible, .envelope:focus-visible{
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+
+<div class="petal-burst" id="petalBurst"></div>
+<div class="heart-field" id="heartField"></div>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">1 Agustus · Happy Girlfriend Day</span>
+    <h1>Untuk kamu, <em>yang selalu</em> ada di setiap cerita.</h1>
+    <p class="sub">Hari ini bukan tentang hadiah besar — tapi tentang berhenti sejenak untuk bilang: kamu berarti, lebih dari yang biasa kuucapkan.</p>
+  </header>
+
+  <div class="envelope-stage">
+    <div>
+      <div class="envelope" id="envelope" tabindex="0" role="button" aria-label="Buka amplop untuk membaca pesan">
+        <div class="body"></div>
+        <div class="letter">
+          <div class="letter-text">
+            <p>"Terima kasih sudah jadi tempat pulang paling nyaman.</p>
+            <p style="margin-top:0.6rem">Aku ingat waktu pertama kali kita ketemu — aku nggak pernah nyangka satu obrolan singkat bisa berubah jadi ini semua. Setiap hari bareng kamu terasa seperti bonus, bukan kewajiban.</p>
+            <p style="margin-top:0.6rem">Kamu yang bikin hari biasa terasa nggak biasa. Yang selalu ada di momen aku lagi capek, lagi semangat, atau lagi bingung mau ngapain sama hidup.</p>
+            <p style="margin-top:0.6rem">Selamat Hari Pacar Nasional, sayang. Ini baru sebagian kecil dari alasan aku bersyukur punya kamu." 💌</p>
+          </div>
+          <div class="letter-photo" id="letter-photo">
+            <span class="placeholder-icon"><img src="fotooo.jpeg" alt=""></span>
+            <span class="placeholder-label"></span>
+          </div>
+        </div>
+        <div class="pocket"></div>
+        <div class="flap"></div>
+        <div class="seal">♥</div>
+      </div>
+      <p class="hint" id="hint">klik amplopnya untuk membuka pesan</p>
+    </div>
+  </div>
+
+  <h2 class="reasons-title">Beberapa alasan (dari banyak alasan)</h2>
+  <div class="reasons">
+    <div class="reason-card">
+      <span class="icon">☕</span>
+      <h3>Hal-hal kecil</h3>
+      <p>Cara kamu ingat pesanan favoritku, tanpa perlu diminta.</p>
+    </div>
+    <div class="reason-card">
+      <span class="icon">🌙</span>
+      <h3>Percakapan larut malam</h3>
+      <p>Obrolan panjang yang bikin masalah terasa lebih ringan.</p>
+    </div>
+    <div class="reason-card">
+      <span class="icon">🌷</span>
+      <h3>Caramu bertumbuh</h3>
+      <p>Semangat kamu mengejar mimpi jadi pengingat untuk terus mencoba.</p>
+    </div>
+    <div class="reason-card">
+      <span class="icon">🤍</span>
+      <h3>Rasa aman</h3>
+      <p>Bersamamu, jadi diri sendiri terasa cukup.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>"Happy Girlfriend Day — For My Lovely Elisa."</p>
+    <span>buatnya agak terburu-buru karna dah mepet Agustus hehe</span>
+  </footer>
+</div>
+
+<script>
+  // Full-screen flower burst on page load
+  (function(){
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const burst = document.getElementById('petalBurst');
+    if(reduceMotion || !burst){ if(burst) burst.remove(); return; }
+
+    const flowers = ['🌸','🌺','🌷','🌼','💮'];
+    const petalCount = 55;
+
+    for(let i=0;i<petalCount;i++){
+      const p = document.createElement('span');
+      p.textContent = flowers[Math.floor(Math.random()*flowers.length)];
+      p.style.fontSize = (1.1 + Math.random()*1.6) + 'rem';
+
+      // Spread target: random point across the viewport, from the center
+      const angle = Math.random() * Math.PI * 2;
+      const spreadDist = 30 + Math.random() * 45; // vw/vh units mixed
+      p.style.setProperty('--midX', (Math.cos(angle) * spreadDist) + 'vw');
+      p.style.setProperty('--midY', (Math.sin(angle) * spreadDist * 0.6) + 'vh');
+      p.style.setProperty('--fallY', (35 + Math.random() * 40) + 'vh');
+
+      const duration = 2.6 + Math.random()*1.6;
+      p.style.animationDuration = duration + 's';
+      p.style.animationDelay = (Math.random()*0.5) + 's';
+      burst.appendChild(p);
+    }
+
+    // Let the burst play, then fade it out and remove from the DOM
+    setTimeout(() => burst.classList.add('fade'), 3200);
+    setTimeout(() => burst.remove(), 4400);
+  })();
+
+
+  const field = document.getElementById('heartField');
+  const symbols = ['♥','❤','💕'];
+  const count = 14;
+  for(let i=0;i<count;i++){
+    const s = document.createElement('span');
+    s.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+    s.style.left = Math.random()*100 + '%';
+    s.style.animationDuration = (10 + Math.random()*12) + 's';
+    s.style.animationDelay = (Math.random()*10) + 's';
+    s.style.fontSize = (1 + Math.random()*1.2) + 'rem';
+    field.appendChild(s);
+  }
+
+  // Envelope open interaction
+  const envelope = document.getElementById('envelope');
+  const hint = document.getElementById('hint');
+  let opened = false;
+
+  function toggleEnvelope(){
+    opened = !opened;
+    envelope.classList.toggle('open', opened);
+    hint.textContent = opened ? 'klik lagi untuk menutup' : 'klik amplopnya untuk membuka pesan';
+  }
+
+  envelope.addEventListener('click', toggleEnvelope);
+  envelope.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggleEnvelope();
+    }
+  });
+</script>
+
+</body>
+</html>
